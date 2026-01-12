@@ -1,0 +1,30 @@
+{
+  "name": "aurwave-server",
+  "version": "1.0.0",
+  "description": "Backend API for the music app.",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev --respawn src/app.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "neon",
+    "prisma"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/adapter-neon": "^6.18.0",
+    "@prisma/client": "^6.18.0",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "prisma": "^6.18.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.0"
+  }
+}

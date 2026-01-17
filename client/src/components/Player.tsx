@@ -3,7 +3,7 @@ import Controllers from "./Controllers";
 import Slider from "./Slider";
 import TrackInfo from "./TrackInfo";
 import VolumeSlider from "./VolumeSlider";
-import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 
 interface props {
   audioRef: React.RefObject<HTMLAudioElement | null>;
@@ -12,8 +12,8 @@ interface props {
 }
 
 const Player = ({ audioRef, }: props) => {
-   const { isPlaying,setIsPlaying,currentTrack  } = usePlayerContext();
-  
+  const { isPlaying, setIsPlaying, currentTrack } = usePlayerContext();
+
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);

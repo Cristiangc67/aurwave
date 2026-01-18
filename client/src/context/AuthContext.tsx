@@ -22,6 +22,7 @@ interface AuthContextType {
     login: (email: string, password: string) => Promise<void>,
     logout: () => void,
     register: (email: string, password: string, username: string) => Promise<void>,
+    isTokenExpired: boolean,
 }
 export const useAuth = () => {
     const context = useContext(AuthContext)
@@ -38,8 +39,12 @@ export const Authprovider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<user | null>(null)
     const [loading, setLoading] = useState(false)
     const [token, setToken] = useState(localStorage.getItem("token") || null);
+    const [isTokenExpired, setIsTokenExpired] = useState(true);
+
+
 
     useEffect(() => {
+
         const initializeAuth = () => {
             if (token) {
                 try {
@@ -52,14 +57,18 @@ export const Authprovider = ({ children }: { children: React.ReactNode }) => {
                             username: decoded.username,
                         })
                         setLoading(false)
+                        setIsTokenExpired(false)
                     } else {
                         logout()
+                        setIsTokenExpired(true)
                     }
                 } catch (error) {
                     console.log(error)
                 } finally {
                     setLoading(false)
                 }
+            } else {
+                setIsTokenExpired(true)
             }
         }
         initializeAuth()
@@ -123,7 +132,7 @@ export const Authprovider = ({ children }: { children: React.ReactNode }) => {
         }
     }
 
-    const value = { user, token, loading, login, logout, register }
+    const value = { user, token, loading, login, logout, register, isTokenExpired }
     return (
         <AuthContext.Provider value={value}>
             {children}

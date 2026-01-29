@@ -12,7 +12,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2">
-          <ButtonSidebar to="/" text="Biblioteca" icon={LuLibrary} />
+          <ButtonSidebar to="/library" text="Biblioteca" icon={LuLibrary} />
           <ButtonSidebar to="/" text="Buscar" icon={LuGlobe} />
           <ButtonSidebar to="/create-playlist" text="Crear Playlist" icon={LuPlus} />
         </div>

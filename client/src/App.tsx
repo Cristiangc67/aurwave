@@ -7,10 +7,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import Profile from "./pages/Profile";
-import { useRef } from "react";
+
+import Library from "./pages/Library";
+import PlaylistDetail from "./pages/PlaylistDetail";
 
 function App() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+
 
 
   return (
@@ -20,7 +22,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home audioRef={audioRef} />}
+            element={<Home />}
           />
           <Route
             path="/create-playlist"
@@ -38,10 +40,18 @@ function App() {
             path="/profile"
             element={<Profile />}
           />
+          <Route
+            path="/library"
+            element={<Library />}
+          />
+          <Route
+            path="/playlist/:id"
+            element={<PlaylistDetail />}
+          />
         </Routes>
       </div>
       <Player
-        audioRef={audioRef}
+
       />
     </BrowserRouter>
   );

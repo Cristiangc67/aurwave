@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import type { Song } from "../types/song";
 import { usePlayerContext } from "../context/PlayerContext";
 
-interface props {
-  audioRef: React.RefObject<HTMLAudioElement | null>;
-  
-}
 
 
 
-const Home = ({ audioRef }: props) => {
-  const { playSingleTrack } = usePlayerContext();
+
+const Home = () => {
+  const { playSingleTrack, audioRef } = usePlayerContext();
 
   const [data, setData] = useState<Song[]>([]);
   const [loading, setLoading] = useState(false);

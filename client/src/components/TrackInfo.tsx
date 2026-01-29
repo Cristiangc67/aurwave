@@ -2,6 +2,7 @@ import { usePlayerContext } from "../context/PlayerContext";
 
 const TrackInfo = () => {
   const { currentTrack } = usePlayerContext();
+
   return (
     <div className="flex items-center gap-4 w-1/3 min-w-[120px]">
       <img

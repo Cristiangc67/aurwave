@@ -46,7 +46,7 @@ const Player = () => {
 
 
   return (
-    <footer className="w-dvw h-[10vh] px-4 bg-[#271346] z-50 border-t-4 border-solid border-[#BD53D4] bottom-0 drop-shadow-[0_-2px_9px_#9E37C3] flex  ">
+    <footer className="w-dvw h-[10vh] px-4 bg-[#121212] z-50 border-t-4 border-solid border-[#a855f7] bottom-0 drop-shadow-[0_-2px_9px_#9E37C3] flex  ">
       <audio
         onLoadedMetadata={handleLoadedMetadata}
         ref={audioRef}

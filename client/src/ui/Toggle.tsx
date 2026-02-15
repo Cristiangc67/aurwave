@@ -35,7 +35,7 @@ const Toggle: React.FC<ToggleProps> = ({
 
     return (
         <label
-            className={`inline-flex items-center gap-2 select-none ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+            className={`inline-flex items-center gap-2 w-fit select-none ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
                 } ${className}`}
         >
             {label && <span className="text-sm">{label}</span>}
@@ -45,9 +45,9 @@ const Toggle: React.FC<ToggleProps> = ({
                 disabled={disabled}
                 onClick={() => onChange(!checked)}
                 className={`
-          relative rounded-full transition-colors duration-200
+          relative rounded-full transition-colors duration-200 cursor-pointer
           ${trackSizes[size]}
-          ${checked ? "bg-[#DE41E9]" : "bg-gray-400"}
+          ${checked ? "bg-[#a855f7]" : "bg-gray-400"}
         `}
             >
                 <span

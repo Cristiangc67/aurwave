@@ -17,7 +17,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex relative">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <Routes>
           <Route

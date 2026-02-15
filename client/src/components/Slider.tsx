@@ -29,7 +29,7 @@ const Slider = ({ progress, duration, handleSeek }: props) => {
       #593678 ${(progress / duration) * 100}%,
       #593678 100%)`,
         }}
-        className="flex-1 h-1 bg-zinc-600 rounded-lg appearance-none cursor-pointer accent-white drop-shadow-[0_0_9px_#9E37C3] hover:accent-[#BD53D4]"
+        className="flex-1 h-1 bg-zinc-600 rounded-lg appearance-none cursor-pointer accent-white drop-shadow-[0_0_9px_#9E37C3] hover:accent-[#a855f7]"
       />
       <span className="min-w-10">{formatTime(duration)}</span>
     </div>

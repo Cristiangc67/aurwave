@@ -49,16 +49,18 @@ const CreatePlaylist = () => {
 
 
   return (
-    <div className=" bg-linear-to-b from-[#9f2ea7] to-[#1a1130] w-full p-10">
+    <div className=" bg-purple-radial w-full  p-10">
       {loading && <p>Cargando...</p>}
-      {!loading && <div className="bg-[#26163A] py-4 px-8 rounded-2xl w-1/2 mx-auto ">
+      {!loading && <div className="bg-[#1c1c1f] py-4 px-8 rounded-2xl lg:w-2/3 xl:w-1/2 w-full mx-auto border-white/10 border  shadow-xl/30 shadow-purple-500/20 ">
         <h1 className="text-white text-2xl font-bold">Crear Playlist</h1>
-        <div className="flex items-start justify-between my-10 ">
+        <div className="flex xl:flex-row flex-col items-start justify-between my-10  gap-10">
           <img src="playlist.png" className="w-40 h-40 rounded-lg" alt="" />
 
-          <form action="POST" onSubmit={handleSubmit} className="flex flex-col justify-start gap-4   w-9/12" >
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="bg-[#3f2a7a] p-2 rounded-xl focus:outline-none" required />
-            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descripción" className="bg-[#3f2a7a] p-2 rounded-xl focus:outline-none" />
+          <form action="POST" onSubmit={handleSubmit} className="flex flex-col justify-start gap-4 w-full xl:w-9/12" >
+            <label htmlFor="name" className="text-white/80 font-semibold">Nombre</label>
+            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Mi playlist" className="bg-[#2a2a2e] text-white p-2 rounded-lg border border-white/10 outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all duration-200" required />
+            <label htmlFor="description" className="text-white/80 font-semibold">Descripción</label>
+            <textarea id="description" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Describe tu playlist" className="bg-[#2a2a2e] resize-none text-white p-2 rounded-lg border border-white/10 outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all duration-200" />
             <Toggle
               checked={isPublic}
               onChange={setIsPublic}
@@ -66,7 +68,7 @@ const CreatePlaylist = () => {
               label="Playlist pública"
             />
 
-            <button type="submit" className="bg-[#DE41E9] py-2 rounded-full w-fit  px-7 cursor-pointer">Crear Playlist</button>
+            <button type="submit" className="bg-[#a855f7] hover:bg-[#9E37C3] hover:scale-101 transition-all duration-200  py-2 rounded-full w-fit  px-7 cursor-pointer self-end font-semibold">Crear Playlist</button>
           </form>
         </div>
       </div>}

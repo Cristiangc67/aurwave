@@ -10,15 +10,15 @@ const Controllers = ({ isPlaying }: Props) => {
   const { handlePrevious, handleNext, togglePlay } = usePlayerContext();
   return (
     <div className="flex gap-3 items-center">
-      <button className="cursor-pointer" onClick={handlePrevious}><IoMdSkipBackward className="w-7 h-7 fill-[#6b418f]" /></button>
+      <button className="cursor-pointer group" onClick={handlePrevious}><IoMdSkipBackward className="group-hover:fill-[#a855f7] group-hover:drop-shadow-[0_0_9px_#9E37C3] transition-colors duration-100  w-7 h-7 fill-[#6b418f]" /></button>
       <button className="cursor-pointer" onClick={togglePlay}>
         {isPlaying ? (
-          <FaCirclePause className="w-10 h-10 drop-shadow-[0_0_9px_#9E37C3] fill-[#DE41E9]" />
+          <FaCirclePause className="w-10 h-10 drop-shadow-[0_0_9px_#9E37C3] fill-[#a855f7]" />
         ) : (
-          <FaCirclePlay className="w-10 h-10 drop-shadow-[0_0_9px_#9E37C3] fill-[#DE41E9]" />
+          <FaCirclePlay className="w-10 h-10 drop-shadow-[0_0_9px_#9E37C3] fill-[#a855f7]" />
         )}
       </button>
-      <button className="cursor-pointer" onClick={handleNext}><IoMdSkipForward className="w-7 h-7 fill-[#6b418f]" /></button>
+      <button className="cursor-pointer group" onClick={handleNext}><IoMdSkipForward className="group-hover:fill-[#a855f7] group-hover:drop-shadow-[0_0_9px_#9E37C3] transition-colors duration-100  w-7 h-7 fill-[#6b418f]" /></button>
     </div>
   );
 };

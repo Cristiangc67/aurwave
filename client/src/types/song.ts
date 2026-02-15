@@ -6,9 +6,9 @@ export interface Song {
   title: string;
   artist_id: number;
   album_id: number;
-  duration: number; // en segundos
+  duration: number;
   file_url: string;
-  created_at: string; // o Date si planeas convertirlo
+  created_at: string;
   artist: Artist;
   album: Album;
 }

@@ -1,0 +1,85 @@
+import { useEffect, useRef } from "react";
+import { LuEllipsis } from "react-icons/lu";
+import type { Song } from "../types/song";
+import { usePlayerContext } from "../context/PlayerContext";
+
+interface Props {
+    song: Song
+    playlistId?: number
+    onRemovedFromPlaylist?: (songId: number) => void
+}
+
+
+
+
+const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
+    const { setQueue } = usePlayerContext()
+    const optionsRef = useRef<HTMLUListElement>(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
+                optionsRef.current.classList.add("hidden")
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
+
+    const removeFromPlaylist = async () => {
+        if (!playlistId) return
+
+        try {
+            const response = await fetch(
+                `http://localhost:3000/api/playlists/${playlistId}/songs/${song.id}`,
+                { method: "DELETE" }
+            )
+
+            if (!response.ok) {
+                throw new Error("Failed to remove song from playlist")
+            }
+
+            onRemovedFromPlaylist?.(song.id)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
+
+    return (
+        <button className="col-span-1 flex items-center justify-center group me-5 cursor-pointer relative" onClick={() => optionsRef.current?.classList.remove("hidden")}>
+            <LuEllipsis size={25} className="group-hover:text-white transition-all group-hover:scale-x-110  duration-300" />
+            <ul
+                ref={optionsRef}
+                className="hidden absolute z-10 border border-gray-600/20 bg-[#352366]/10 rounded-lg shadow-lg right-0 px-3 py-2 text-nowrap backdrop-blur-xs "
+            >
+                <li className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
+                    Play
+                </li>
+
+                <li className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
+                    Share
+                </li>
+
+                {playlistId ? (
+                    <li
+                        onClick={removeFromPlaylist}
+                        className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm text-red-400"
+                    >
+                        Eliminar de Playlist
+                    </li>
+                ) : (
+                    <li className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
+                        Agregar a Playlist
+                    </li>
+                )}
+            </ul>
+
+        </button>
+    )
+}
+
+export default OptionsButton

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { LuEllipsis } from "react-icons/lu";
 import type { Song } from "../types/song";
-import { usePlayerContext } from "../context/PlayerContext";
+import { useModalContext } from "../context/ModalContext";
+import AddToPlaylistModal from "./addToPlaylistModal";
 
 interface Props {
     song: Song
@@ -13,8 +14,9 @@ interface Props {
 
 
 const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
-    const { setQueue } = usePlayerContext()
+
     const optionsRef = useRef<HTMLUListElement>(null)
+    const { openModal } = useModalContext()
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -49,6 +51,7 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
 
 
 
+
     return (
         <button className="col-span-1 flex items-center justify-center group me-5 cursor-pointer relative" onClick={() => optionsRef.current?.classList.remove("hidden")}>
             <LuEllipsis size={25} className="group-hover:text-white transition-all group-hover:scale-x-110  duration-300" />
@@ -72,7 +75,7 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
                         Eliminar de Playlist
                     </li>
                 ) : (
-                    <li className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
+                    <li onClick={() => openModal(<AddToPlaylistModal song={song} />)} className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
                         Agregar a Playlist
                     </li>
                 )}

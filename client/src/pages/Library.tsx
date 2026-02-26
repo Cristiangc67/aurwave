@@ -3,7 +3,7 @@ import Loader from "../components/Loader"
 import PlaylistItem from "../components/PlaylistItem"
 import { useAuth } from "../context/AuthContext"
 import type { Song } from "../types/song"
-import { useNavigate } from "react-router"
+//import { useNavigate } from "react-router"
 interface Playlist {
     id: number
     name: string
@@ -32,7 +32,7 @@ const Library = () => {
     const [playlists, setPlaylists] = useState<Playlist[]>([])
     const [loading, setLoading] = useState(true)
     const { user } = useAuth()
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
 
     useEffect(() => {
         /* if (!user) {

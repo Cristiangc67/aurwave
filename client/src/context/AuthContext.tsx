@@ -127,6 +127,7 @@ export const Authprovider = ({ children }: { children: React.ReactNode }) => {
 
         } catch (error) {
             console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }

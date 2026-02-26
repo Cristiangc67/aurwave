@@ -59,12 +59,12 @@ const PlaylistDetail = () => {
         <div className="w-screen h-[90vh] bg-transparent">
 
             <div className=" w-full h-[30vh] bg-linear-to-b from-purple-900/20 to-transparent flex items-center  px-10">
-                <div className="w-52 h-52 rounded-lg overflow-hidden shadow-black/50 shadow-lg aspect-square">
+                <div className="lg:w-52 lg:h-52 md:w-48 md:h-48 w-28 h-28 rounded-lg overflow-hidden shadow-black/50 shadow-lg aspect-square">
                     <img className="w-full h-full object-cover " src="https://picsum.photos/200" alt="" />
                 </div>
-                <div className="w-3/4 h-fit flex flex-col gap-2 ps-10">
+                <div className="lg:w-3/4 md:w-2/3 w-1/2 h-fit flex flex-col gap-2 ps-10">
                     <p className="text-gray-400 font-semibold text-sm uppercase">Playlist</p>
-                    <h1 className="text-7xl font-bold">{playlist?.name}</h1>
+                    <h1 className="lg:text-7xl md:text-6xl text-5xl font-bold">{playlist?.name}</h1>
                     <p className="text-gray-400 text-sm">{playlist?.description}</p>
                     <div className="flex items-center gap-2">
                         <span className="text-white">{playlist?.user?.username}</span>
@@ -79,9 +79,9 @@ const PlaylistDetail = () => {
             <div className="w-full h-fit p-10">
                 <div className="grid grid-cols-12 border-b border-white/10 pb-2 mb-2 justify-around">
 
-                    <span className="col-span-5 lg:col-span-4 ps-4">Titulo</span>
-                    <span className="col-span-4 lg:col-span-5 lg:ps-4">Album</span>
-                    <span className="col-span-1 lg:col-span-3">Duracion</span>
+                    <span className="col-span-5 lg:col-span-4 ps-4 text-sm">Titulo</span>
+                    <span className="col-span-4 lg:col-span-5 lg:ps-4 text-sm ">Album</span>
+                    <span className="col-span-1 lg:col-span-3 text-sm">Duracion</span>
                 </div>
                 <ul className="space-y-4">
                     {playlist?.songs.map((track) => (

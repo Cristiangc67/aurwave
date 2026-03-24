@@ -89,6 +89,7 @@ const PlaylistDetail = () => {
                             key={track.id}
                             track={track}
                             playlist={playlist}
+                            setPlaylist={setPlaylist}
                         />
                     ))}
 

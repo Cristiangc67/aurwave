@@ -4,16 +4,41 @@ import type { Song } from "../types/song";
 import { useModalContext } from "../context/ModalContext";
 import AddToPlaylistModal from "./addToPlaylistModal";
 
+interface Track {
+    added_at: string
+    id: number
+    playlist_id: number
+    position: number
+    song_id: number
+    song: Song
+}
+
+
+interface Playlist {
+    id: number
+    name: string
+    created_at: string
+    description: string
+    user: {
+        id: number
+        username: string
+    }
+    songs: Track[]
+    is_public: boolean
+    user_id: number
+}
+
 interface Props {
     song: Song
     playlistId?: number
     onRemovedFromPlaylist?: (songId: number) => void
+    setPlaylist?: React.Dispatch<React.SetStateAction<Playlist | null>>
 }
 
 
 
 
-const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
+const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }: Props) => {
 
     const optionsRef = useRef<HTMLUListElement>(null)
     const { openModal } = useModalContext()
@@ -42,6 +67,15 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist }: Props) => {
             if (!response.ok) {
                 throw new Error("Failed to remove song from playlist")
             }
+
+
+            setPlaylist?.((prev) => {
+                if (!prev) return prev
+                return {
+                    ...prev,
+                    songs: prev.songs.filter((s) => s.song_id !== song.id),
+                }
+            })
 
             onRemovedFromPlaylist?.(song.id)
         } catch (error) {

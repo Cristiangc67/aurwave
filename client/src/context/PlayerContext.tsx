@@ -149,7 +149,7 @@ export const PlayerContextProvider = ({
 
   const playSingleTrack = (track: Song) => {
     userInteractedRef.current = true
-    setQueue([])
+    setQueue([track])
     setCurrentIndex(0)
     setCurrentTrack(track)
     setIsPlaying(true)
@@ -163,7 +163,12 @@ export const PlayerContextProvider = ({
     if (!isReadyRef.current) return
 
     const next = queue[currentIndex + 1]
-    if (!next) return
+    if (!next) {
+      setCurrentIndex(0)
+      setCurrentTrack(queue[0])
+      setIsPlaying(true)
+      return
+    }
 
     setCurrentIndex(i => i + 1)
     setCurrentTrack(next)

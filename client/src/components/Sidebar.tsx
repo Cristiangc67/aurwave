@@ -1,5 +1,5 @@
 import logo from "../assets/aurwave.svg";
-import { MdLibraryMusic, MdSearch, MdAddBox } from "react-icons/md";
+import { MdLibraryMusic, MdSearch, MdAddBox, MdHome } from "react-icons/md";
 import ButtonSidebar from "./ButtonSidebar";
 import UserLoginButton from "./UserLoginButton";
 import { useState } from "react";
@@ -15,6 +15,7 @@ const Sidebar = () => {
         </div>
 
         <nav className="flex flex-col items-center justify-center gap-2 space-y-1 px-3 w-full">
+          <ButtonSidebar setActive={setActive} to="/home" text="Inicio" icon={MdHome} active={active === "home"} />
           <ButtonSidebar setActive={setActive} to="/library" text="Biblioteca" icon={MdLibraryMusic} active={active === "library"} />
           <ButtonSidebar setActive={setActive} to="/" text="Buscar" icon={MdSearch} active={active === "search"} />
           <ButtonSidebar setActive={setActive} to="/create-playlist" text="Crear Playlist" icon={MdAddBox} active={active === "create-playlist"} />

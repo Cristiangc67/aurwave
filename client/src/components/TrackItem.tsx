@@ -30,14 +30,14 @@ interface Props {
     track?: Track
     song?: Song
     playlist?: Playlist
-    setPlaylist?: (value: Playlist) => void
+    setPlaylist?: React.Dispatch<React.SetStateAction<Playlist | null>>
 }
 
 
 
 
 
-const TrackItem = ({ track, song: propSong, playlist }: Props) => {
+const TrackItem = ({ track, song: propSong, playlist, setPlaylist }: Props) => {
     const { playSingleTrack, playFromPlaylist } = usePlayerContext()
 
     const song = track ? track.song : propSong
@@ -89,6 +89,7 @@ const TrackItem = ({ track, song: propSong, playlist }: Props) => {
 
                 song={song}
                 playlistId={playlist?.id}
+                setPlaylist={setPlaylist}
             />
         </li>
     )

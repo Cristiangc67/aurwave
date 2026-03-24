@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Song } from "../types/song";
 import Loader from "../components/Loader";
+import SearchBar from "../components/SearchBar";
 
 import TrackItem from "../components/TrackItem";
 
@@ -13,6 +14,7 @@ const Home = () => {
 
   const [data, setData] = useState<Song[]>([]);
   const [loading, setLoading] = useState(false);
+  const [searchResult, setSearchResult] = useState<Song[]>([]);
 
   const fetchAll = async () => {
     try {
@@ -36,8 +38,11 @@ const Home = () => {
 
   return (
     <div className="bg-transparent w-full p-10">
+      <SearchBar setSearchResult={setSearchResult} />
       {loading ? <Loader /> : <ul className="space-y-4">
-        {data.map((song) => (
+        {searchResult.length > 0 ? searchResult.map((song) => (
+          <TrackItem key={song.id} song={song} />
+        )) : data.map((song) => (
           <TrackItem key={song.id} song={song} />
         ))}
       </ul>}

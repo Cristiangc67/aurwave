@@ -7,15 +7,21 @@ const Register = () => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault()
+        if (password !== confirmPassword) {
+            setError("Las contraseñas no coinciden")
+            return
+        }
         setError(null)
         setLoading(true)
         try {
-            const response = await fetch("http://localhost:3000/api/register", {
+            const response = await fetch("http://localhost:3000/api/auth/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,6 +69,10 @@ const Register = () => {
                     <div className="flex flex-col gap-2 w-full">
                         <label htmlFor="password" className="font-semibold">Contraseña</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" id="password" className="bg-[#2a2a2e] text-white p-2 rounded-lg border border-white/10 outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all duration-200" />
+                    </div>
+                    <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="confirmPassword" className="font-semibold">Confirmar contraseña</label>
+                        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirmar contraseña" id="confirmPassword" className="bg-[#2a2a2e] text-white p-2 rounded-lg border border-white/10 outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all duration-200" />
                     </div>
                     <button disabled={loading} type="submit" className="bg-[#a855f7] hover:bg-[#9E37C3] hover:shadow-lg hover:shadow-[#9E37C3]/30 hover:scale-101 transition-all duration-200  py-2 rounded-full w-fit  px-7 cursor-pointer self-end font-semibold">Registrarse</button>
                 </form>

@@ -2,16 +2,18 @@ import { useEffect, useState } from "react"
 import Toggle from "../ui/Toggle"
 import { useAuth } from "../context/AuthContext"
 import { useNavigate } from "react-router"
+import Loader from "../components/Loader"
 
 const CreatePlaylist = () => {
 
-  const { isTokenExpired, user } = useAuth()
+  const { isTokenExpired, user, loading: authLoading } = useAuth()
+  const navigate = useNavigate()
   useEffect(() => {
+    if (authLoading) return
     if (isTokenExpired) {
       navigate("/auth/login")
     }
-  }, [isTokenExpired])
-  const navigate = useNavigate()
+  }, [isTokenExpired, authLoading])
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -46,6 +48,13 @@ const CreatePlaylist = () => {
   }
 
 
+  if (authLoading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-purple-radial">
+        <Loader />
+      </div>
+    )
+  }
 
 
   return (

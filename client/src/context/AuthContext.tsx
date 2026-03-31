@@ -37,7 +37,7 @@ export const useAuth = () => {
 
 export const Authprovider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<user | null>(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [isTokenExpired, setIsTokenExpired] = useState(true);
 
@@ -64,11 +64,13 @@ export const Authprovider = ({ children }: { children: React.ReactNode }) => {
                     }
                 } catch (error) {
                     console.log(error)
+                    logout()
                 } finally {
                     setLoading(false)
                 }
             } else {
                 setIsTokenExpired(true)
+                setLoading(false)
             }
         }
         initializeAuth()

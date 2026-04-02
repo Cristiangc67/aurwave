@@ -55,7 +55,7 @@ const AddToPlaylistModal = ({ song }: { song: Song }) => {
             if (!user) return;
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/playlists/user/${user.id}`,
+                    `${import.meta.env.VITE_API_URL}/api/playlists/user/${user.id}`,
                 );
 
                 const data = await response.json();
@@ -82,7 +82,7 @@ const AddToPlaylistModal = ({ song }: { song: Song }) => {
 
         try {
             const response = await fetch(
-                `http://localhost:3000/api/playlists/${playlistId}/songs`,
+                `${import.meta.env.VITE_API_URL}/api/playlists/${playlistId}/songs`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -127,7 +127,7 @@ const AddToPlaylistModal = ({ song }: { song: Song }) => {
 
         try {
             const response = await fetch(
-                `http://localhost:3000/api/playlists/${playlistId}/songs/${song.id}`,
+                `${import.meta.env.VITE_API_URL}/api/playlists/${playlistId}/songs/${song.id}`,
                 { method: "DELETE" },
             );
 

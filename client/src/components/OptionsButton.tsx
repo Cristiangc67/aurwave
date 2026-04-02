@@ -70,7 +70,7 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }:
 
         try {
             const response = await fetch(
-                `http://localhost:3000/api/playlists/${playlistId}/songs/${song.id}`,
+                `${import.meta.env.VITE_API_URL}/api/playlists/${playlistId}/songs/${song.id}`,
                 { method: "DELETE" }
             )
 

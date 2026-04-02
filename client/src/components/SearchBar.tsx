@@ -19,7 +19,7 @@ const SearchBar = ({ setSearchResult }: { setSearchResult: (results: Song[]) => 
             setLoading(true);
 
             const response = await fetch(
-                `http://localhost:3000/api/songs/search?q=${encodeURIComponent(value)}`
+                `${import.meta.env.VITE_API_URL}/api/songs/search?q=${encodeURIComponent(value)}`
             );
 
             const data = await response.json();
@@ -86,7 +86,7 @@ const SearchBar = ({ setSearchResult }: { setSearchResult: (results: Song[]) => 
 
 
             <input
-                className="bg-white/10 p-1  hover:bg-white/20 transition-colors"
+                className="bg-white/10 p-1  hover:bg-white/20 transition-colors outline-none"
                 value={value}
                 placeholder="Buscar"
                 onChange={handleChange}

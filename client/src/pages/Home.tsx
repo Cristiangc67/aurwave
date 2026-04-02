@@ -19,7 +19,7 @@ const Home = () => {
   const fetchAll = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/songs");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/songs`);
       if (!res.ok) throw new Error("Error fetching songs");
       const data = await res.json();
       setData(data);

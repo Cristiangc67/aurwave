@@ -38,7 +38,7 @@ const PlaylistDetail = () => {
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/playlists/${id}`)
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/playlists/${id}`)
                 const data = await response.json()
                 setPlaylist(data)
 

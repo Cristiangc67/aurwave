@@ -28,7 +28,6 @@ const Player = () => {
 
 
 
-    // Auto next track logic could go here
     if (progress === duration) {
       handleNext();
     }

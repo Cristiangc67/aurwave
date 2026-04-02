@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuEllipsis } from "react-icons/lu";
 import type { Song } from "../types/song";
 import { useModalContext } from "../context/ModalContext";
 import AddToPlaylistModal from "./addToPlaylistModal";
+import { usePlayerContext } from "../context/PlayerContext";
+import { useToast } from "../context/ToastContext";
 
 interface Track {
     added_at: string
@@ -42,8 +44,14 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }:
 
     const optionsRef = useRef<HTMLUListElement>(null)
     const { openModal } = useModalContext()
+    const { addToQueue, queue } = usePlayerContext()
+    const [isAdded, setIsAdded] = useState(queue.includes(song))
+    const { showToast } = useToast()
+
+
 
     useEffect(() => {
+
         const handleClickOutside = (event: MouseEvent) => {
             if (optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
                 optionsRef.current.classList.add("hidden")
@@ -54,6 +62,8 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }:
             document.removeEventListener("mousedown", handleClickOutside)
         }
     }, [])
+
+
 
     const removeFromPlaylist = async () => {
         if (!playlistId) return
@@ -84,6 +94,16 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }:
     }
 
 
+    const handleAddToQueue = () => {
+        try {
+            addToQueue(song)
+            setIsAdded(true)
+            showToast("Canción agregada a la cola", "success")
+        } catch (error) {
+            console.error(error)
+            showToast("Error al agregar canción a la cola", "error")
+        }
+    }
 
 
     return (
@@ -97,9 +117,11 @@ const OptionsButton = ({ song, playlistId, onRemovedFromPlaylist, setPlaylist }:
                     Play
                 </li>
 
-                <li className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
-                    Share
-                </li>
+                {!isAdded && (
+                    <li onClick={() => handleAddToQueue()} className="hover:bg-[#241845]/50 transition-colors w-full px-2 rounded-sm">
+                        Agregar a cola
+                    </li>
+                )}
 
                 {playlistId ? (
                     <li

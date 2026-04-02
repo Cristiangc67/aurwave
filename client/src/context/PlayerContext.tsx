@@ -15,6 +15,7 @@ interface PlayerContextType {
   handlePrevious: () => void
   handleEnded: () => void
   setQueue: (value: Song[]) => void
+  addToQueue: (track: Song) => void
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined)
@@ -202,6 +203,11 @@ export const PlayerContextProvider = ({
     setIsPlaying(true);
   };
 
+  const addToQueue = (track: Song) => {
+    userInteractedRef.current = true
+    setQueue(prev => [...prev, track])
+  }
+
   return (
     <PlayerContext.Provider
       value={{
@@ -217,7 +223,8 @@ export const PlayerContextProvider = ({
         handleNext,
         handlePrevious,
         handleEnded,
-        setQueue
+        setQueue,
+        addToQueue
       }}
     >
       {children}
